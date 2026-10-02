@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="main" type="id" />
+    <item name="tvTitulo" type="id" />
+    <item name="tvSubtitulo" type="id" />
+
+    <item name="layoutNome" type="id" />
+    <item name="edtNome" type="id" />
+
+    <item name="layoutDdd" type="id" />
+    <item name="edtDdd" type="id" />
+
+    <item name="layoutTelefone" type="id" />
+    <item name="edtTelefone" type="id" />
+
+    <item name="tvExemplo" type="id" />
+
+    <item name="btnSalvar" type="id" />
+    <item name="btnCancelar" type="id" />
+
+</resources>
