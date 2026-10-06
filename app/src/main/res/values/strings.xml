@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ShopeeADSAnalytics</string>
+    <string name="app_nameJoão">João</string>
+    <string name="testeTelefone">(44) 999405803</string>
+    <string name="EditImg">EditImage</string>
+    <string name="DeleteImg">DeleteImg</string>
 </resources>

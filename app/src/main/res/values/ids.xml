@@ -19,4 +19,6 @@
     <item name="btnSalvar" type="id" />
     <item name="btnCancelar" type="id" />
 
+    <item name="btnAdd" type="id"/>
+
 </resources>
