@@ -36,16 +36,33 @@ object ContatoRepository {
         }
         _listaContato.value=listaAtual
     }
-    fun editarContato(contatoAtualizado: Contatos){
+    fun editarContato(contatoAtualizado: Contatos): Boolean {
         val listaAtual = _listaContato.value.orEmpty().toMutableList()
-        val index=listaAtual.indexOfFirst {
-            it.id==contatoAtualizado.id
-        }
-        if (index != -1) {
 
-            listaAtual[index] = contatoAtualizado
-
-            _listaContato.value = listaAtual
+        val index = listaAtual.indexOfFirst {
+            it.id == contatoAtualizado.id
         }
+
+        // Contato não encontrado na lista
+        if (index == -1) {
+            Log.d("CONTATO", "Contato não encontrado para edição: id ${contatoAtualizado.id}")
+            return false
+        }
+        // Verifica se o telefone já existe em OUTRO contato (ignora o próprio)
+        val numeroExiste = listaAtual.any {
+            it.id != contatoAtualizado.id &&
+                    it.ddd == contatoAtualizado.ddd &&
+                    it.phone == contatoAtualizado.phone
+        }
+        if (numeroExiste) {
+            Log.d(
+                "CONTATO",
+                "Esse Telefone já está cadastrado: ${contatoAtualizado.nome} - (${contatoAtualizado.ddd}) ${contatoAtualizado.phone}"
+            )
+            return false
+        }
+        listaAtual[index] = contatoAtualizado
+        _listaContato.value = listaAtual
+        return true
     }
 }

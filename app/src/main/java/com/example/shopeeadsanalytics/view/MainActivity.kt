@@ -14,47 +14,44 @@ import com.example.shopeeadsanalytics.viewModel.ListContato
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: ListContato by viewModels()
-
     private lateinit var adapter: ContatoAdapter
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ContatoAdapter(emptyList())
+        // Passando callbacks para o Adapter
+        adapter = ContatoAdapter(
+            contatos = emptyList(),
+            onDeleteClick = { id ->
+                viewModel.deletarContato(id)
+            },
+            onEditClick = { contato ->
+                val intent = Intent(this, CadastroContato::class.java)
+                intent.putExtra("contato", contato) // já é Serializable
+                startActivity(intent)
+            }
+        )
 
-        binding.recyclerContatos.layoutManager =
-            LinearLayoutManager(this)
-
+        binding.recyclerContatos.layoutManager = LinearLayoutManager(this)
         binding.recyclerContatos.adapter = adapter
 
-
+        // Observa a lista de contatos
         viewModel.listContato.observe(this) { contatos ->
-
             adapter.atualizarLista(contatos)
 
             contatos.forEach {
-                Log.d(
-                    "CONTATO",
-                    "Contato: ${it.nome} - (${it.ddd}) ${it.phone}"
-                )
+                Log.d("CONTATO", "Contato: ${it.nome} - (${it.ddd}) ${it.phone}")
             }
         }
 
-
+        // Botão de adicionar novo contato
         binding.btnAdd.setOnClickListener {
-
-            val intent = Intent(
-                this,
-                CadastroContato::class.java
-            )
-
+            val intent = Intent(this, CadastroContato::class.java)
             startActivity(intent)
         }
     }
