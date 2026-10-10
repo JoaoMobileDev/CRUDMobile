@@ -11,7 +11,6 @@ import com.example.shopeeadsanalytics.viewModel.ListContato
 class CadastroContato : AppCompatActivity() {
 
     private lateinit var binding: ActivityCadastroContatoBinding
-
     private val viewModel: ListContato by viewModels()
 
     // -1 significa que NÃO estamos editando
